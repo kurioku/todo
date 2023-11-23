@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:todo/resource/interface/folders.dart';
+
+import '/resource/interface/todo_pod.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final watch = ref.watch(foldersPod);
-    final read = ref.read(foldersPod.notifier);
+    final watch = ref.watch(todosPod);
+    final read = ref.read(todosPod.notifier);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Folders'),
         actions: [
@@ -21,36 +21,45 @@ class HomePage extends ConsumerWidget {
               context.go('/settings');
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Add Folder'),
+                    content: TextField(
+                      autofocus: true,
+                      onSubmitted: (title) {
+                        read.add(title);
+                        context.pop();
+                      },
+                    ),
+                  );
+                },
+              );
+            },
+          ),
         ],
       ),
       body: ListView.builder(
         itemCount: watch.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(watch[index].title),
-            onTap: () => context.go('/'), //watch id
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: const Text('Add Folder'),
-                content: TextField(
-                  autofocus: true,
-                  onSubmitted: (title) {
-                    if (title.isNotEmpty) read.addFolder(title);
-                    context.pop();
-                  },
-                ),
-              );
+          return Dismissible(
+            key: ValueKey(watch[index].id),
+            onDismissed: (_) {
+              read.remove(watch[index]);
             },
+            child: CheckboxListTile(
+              title: Text(watch[index].title),
+              value: watch[index].check,
+              onChanged: (_) {
+                read.check(watch[index].id);
+              },
+            ),
           );
         },
-        child: const Icon(Icons.add),
       ),
     );
   }
