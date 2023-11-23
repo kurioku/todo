@@ -16,6 +16,10 @@ class Todos extends _$Todos {
     return [];
   }
 
+  Future<void> initLoad() async {
+    state = await load();
+  }
+
   void add(String title) {
     if (title.isNotEmpty) {
       state = [
@@ -49,9 +53,5 @@ class Todos extends _$Todos {
   void remove(Todo target) {
     state = state.where((t) => t.id != target.id).toList();
     save(state);
-  }
-
-  Future<void> initLoad() async {
-    state = await load();
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/resource/interface/todo_pod.dart';
 
@@ -68,24 +68,21 @@ class _HomePageState extends ConsumerState<HomePage> {
               },
             ),
           ),
-          Visibility(
-            visible: completed.isNotEmpty,
-            child: ExpansionTile(
-              title: Text('Completed ${completed.length}'),
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: completed.length,
-                  itemBuilder: (context, index) {
-                    return CheckboxListTile(
-                      title: Text(completed[index].title),
-                      value: completed[index].check,
-                      onChanged: (_) => read.check(completed[index].id),
-                    );
-                  },
-                ),
-              ],
-            ),
+          ExpansionTile(
+            title: Text('Completed ${completed.length}'),
+            children: [
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: completed.length,
+                itemBuilder: (context, index) {
+                  return CheckboxListTile(
+                    title: Text(completed[index].title),
+                    value: completed[index].check,
+                    onChanged: (_) => read.check(completed[index].id),
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),
