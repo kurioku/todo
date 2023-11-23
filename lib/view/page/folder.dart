@@ -1,37 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:todo/resource/interface/folder_pod.dart';
 
-class HomePage extends ConsumerWidget {
-  const HomePage({super.key});
+import '/resource/interface/folder_pod.dart';
+
+class FolderPage extends HookConsumerWidget {
+  const FolderPage({
+    super.key,
+    required this.id,
+    required this.index,
+  });
+
+  final String id;
+  final int index;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final folderWatch = ref.watch(folderListPod);
+    final folderWatch = ref.watch(folderListPod)[index];
     final folderRead = ref.read(folderListPod.notifier);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Folders'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              context.go('/settings');
-            },
-          ),
-        ],
+        title: Text(folderWatch.title),
       ),
       body: ListView.builder(
-        itemCount: folderWatch.length,
+        itemCount: folderWatch.todos.length,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(folderWatch[index].title),
-            onTap: () => context.go(
-              '/:id',
-              extra: index,
-            ),
+          return CheckboxListTile(
+            title: Text(folderWatch.todos[index].title),
+            value: false,
+            onChanged: (_) {},
           );
         },
       ),
@@ -41,12 +38,12 @@ class HomePage extends ConsumerWidget {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: const Text('Add Folder'),
+                title: const Text('Add Todo'),
                 content: TextField(
                   autofocus: true,
                   onSubmitted: (value) {
                     if (value.isNotEmpty) {
-                      folderRead.addFolder(value);
+                      folderRead.addTodo(value, folderWatch.id);
                     }
                     context.pop();
                   },

@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 import '../model/folder.dart';
+import '../model/todo.dart';
 
 part 'folder_pod.g.dart';
 
@@ -14,21 +15,31 @@ class FolderList extends _$FolderList {
     return [];
   }
 
-  void add(String title) {
+  void addFolder(String title) {
     state = [
       ...state,
       Folder(id: _uuid.v4(), title: title),
     ];
   }
 
-  void edit({required String id, required String title}) {
+  void editFolder({required String id, required String title}) {
     state = [
       for (final folder in state)
         if (folder.id == id) folder.copyWith(title: title) else folder,
     ];
   }
 
-  void remove(Folder target) {
+  void removeFolder(Folder target) {
     state = state.where((t) => t.id != target.id).toList();
+  }
+
+  void addTodo(String title, String id) {
+    state = [
+      for (final f in state)
+        if (f.id == id)
+          f.copyWith(todos: [...f.todos, Todo(id: _uuid.v4(), title: title)])
+        else
+          f
+    ];
   }
 }
