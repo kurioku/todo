@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class Settings extends ConsumerWidget {
-  const Settings({super.key});
+class SettingsPage extends ConsumerWidget {
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Settings'),
+      ),
+    );
   }
 }
