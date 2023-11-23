@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '/resource/interface/todo_pod.dart';
@@ -41,7 +40,6 @@ class _HomePageState extends ConsumerState<HomePage> {
                       autofocus: true,
                       onSubmitted: (title) {
                         read.add(title);
-                        context.pop();
                       },
                     ),
                   );
@@ -53,41 +51,41 @@ class _HomePageState extends ConsumerState<HomePage> {
       ),
       body: Column(
         children: [
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: active.length,
-            itemBuilder: (context, index) {
-              return Dismissible(
-                key: ValueKey(active[index].id),
-                onDismissed: (_) => read.remove(active[index]),
-                child: CheckboxListTile(
-                  title: Text(active[index].title),
-                  value: active[index].check,
-                  onChanged: (_) => read.check(active[index].id),
-                ),
-              );
-            },
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: active.length,
+              itemBuilder: (context, index) {
+                return Dismissible(
+                  key: ValueKey(active[index].id),
+                  onDismissed: (_) => read.remove(active[index]),
+                  child: CheckboxListTile(
+                    title: Text(active[index].title),
+                    value: active[index].check,
+                    onChanged: (_) => read.check(active[index].id),
+                  ),
+                );
+              },
+            ),
           ),
-          const Spacer(),
-          ExpansionTile(
-            title: Text('Completed ${completed.length}'),
-            children: [
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: completed.length,
-                itemBuilder: (context, index) {
-                  return Dismissible(
-                    key: ValueKey(completed[index].id),
-                    onDismissed: (_) => read.remove(completed[index]),
-                    child: CheckboxListTile(
+          Visibility(
+            visible: completed.isNotEmpty,
+            child: ExpansionTile(
+              title: Text('Completed ${completed.length}'),
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: completed.length,
+                  itemBuilder: (context, index) {
+                    return CheckboxListTile(
                       title: Text(completed[index].title),
                       value: completed[index].check,
                       onChanged: (_) => read.check(completed[index].id),
-                    ),
-                  );
-                },
-              ),
-            ],
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),
