@@ -1,3 +1,3 @@
 # todo
 
-A new Flutter project.
+Todo with Riverpod!
