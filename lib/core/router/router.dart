@@ -9,10 +9,12 @@ final router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => const Home(),
-    ),
-    GoRoute(
-      path: '/settings',
-      builder: (context, state) => const Settings(),
+      routes: [
+        GoRoute(
+          path: 'settings',
+          builder: (context, state) => const Settings(),
+        ),
+      ],
     ),
   ],
 );
