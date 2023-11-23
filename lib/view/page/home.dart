@@ -4,11 +4,22 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '/resource/interface/todo_pod.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends ConsumerState<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    ref.read(todosPod.notifier).initLoad();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final watch = ref.watch(todosPod);
     final read = ref.read(todosPod.notifier);
     final completed = watch.where((t) => t.check).toList();
