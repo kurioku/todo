@@ -8,7 +8,6 @@ part 'folder.g.dart';
 @freezed
 class Folder with _$Folder {
   factory Folder({
-    required String id,
     required String title,
     @Default([]) List<Todo> todos,
   }) = _Folder;

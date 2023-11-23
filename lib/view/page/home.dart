@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:todo/resource/interface/folder_pod.dart';
+import 'package:todo/resource/interface/folders.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final folderWatch = ref.watch(folderListPod);
-    final folderRead = ref.read(folderListPod.notifier);
+    final watch = ref.watch(foldersPod);
+    final read = ref.read(foldersPod.notifier);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -24,14 +24,11 @@ class HomePage extends ConsumerWidget {
         ],
       ),
       body: ListView.builder(
-        itemCount: folderWatch.length,
+        itemCount: watch.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(folderWatch[index].title),
-            onTap: () => context.go(
-              '/:id',
-              extra: index,
-            ),
+            title: Text(watch[index].title),
+            onTap: () => context.go('/'), //watch id
           );
         },
       ),
@@ -44,10 +41,8 @@ class HomePage extends ConsumerWidget {
                 title: const Text('Add Folder'),
                 content: TextField(
                   autofocus: true,
-                  onSubmitted: (value) {
-                    if (value.isNotEmpty) {
-                      folderRead.addFolder(value);
-                    }
+                  onSubmitted: (title) {
+                    if (title.isNotEmpty) read.addFolder(title);
                     context.pop();
                   },
                 ),

@@ -19,7 +19,6 @@ final router = GoRouter(
           path: ':id',
           builder: (context, state) => FolderPage(
             id: state.pathParameters['id']!,
-            index: state.extra as int,
           ),
         ),
       ],
