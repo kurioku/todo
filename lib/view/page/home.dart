@@ -13,8 +13,8 @@ class HomePage extends ConsumerStatefulWidget {
 class _HomePageState extends ConsumerState<HomePage> {
   @override
   void initState() {
-    ref.read(todosPod.notifier).initLoad();
     super.initState();
+    ref.read(todosPod.notifier).initLoad();
   }
 
   @override
