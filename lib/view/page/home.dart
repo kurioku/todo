@@ -3,22 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '/resource/interface/todo_pod.dart';
 
-class HomePage extends ConsumerStatefulWidget {
+class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  ConsumerState<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends ConsumerState<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    ref.read(todosPod.notifier).initLoad();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final watch = ref.watch(todosPod);
     final read = ref.read(todosPod.notifier);
     final completed = watch.where((t) => t.check).toList();
@@ -69,7 +58,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
           ),
           ExpansionTile(
-            title: Text('Completed ${completed.length}'),
+            title: const Text('Completed'),
             children: [
               ListView.builder(
                 shrinkWrap: true,
