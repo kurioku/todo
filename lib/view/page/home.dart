@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../router/router.dart';
 import '/resource/interface/todo_pod.dart';
 
 class HomePage extends ConsumerWidget {
@@ -35,6 +36,10 @@ class HomePage extends ConsumerWidget {
                 },
               );
             },
+          ),
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => router.go('/settings'),
           ),
         ],
       ),
