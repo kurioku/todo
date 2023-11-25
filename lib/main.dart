@@ -3,12 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'resource/interface/todo_pod.dart';
 import 'view/router/router.dart';
-import 'view/theme/theme_data.dart';
-import 'view/theme/theme_pod.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await ThemePref.init();
+void main() {
   runApp(const ProviderScope(child: MainApp()));
 }
 
@@ -21,7 +17,7 @@ class MainApp extends ConsumerWidget {
     return MaterialApp.router(
       routerConfig: router,
       title: 'Todo',
-      themeMode: ref.watch(themePod),
+      themeMode: ThemeMode.system,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
     );
