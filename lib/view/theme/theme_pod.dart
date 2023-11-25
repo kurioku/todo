@@ -6,7 +6,7 @@ import 'theme_data.dart';
 part 'theme_pod.g.dart';
 
 @riverpod
-class ThemeState extends _$ThemeState {
+class Theme extends _$Theme {
   @override
   ThemeMode build() {
     return ThemePref().theme();

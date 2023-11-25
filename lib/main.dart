@@ -21,7 +21,7 @@ class MainApp extends ConsumerWidget {
     return MaterialApp.router(
       routerConfig: router,
       title: 'Todo',
-      themeMode: ref.watch(themeStatePod),
+      themeMode: ref.watch(themePod),
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
     );

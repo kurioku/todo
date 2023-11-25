@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../router/router.dart';
 import '/resource/interface/todo_pod.dart';
 
-class HomePage extends ConsumerWidget {
-  const HomePage({super.key});
+class Home extends ConsumerWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -17,7 +17,7 @@ class Settings extends ConsumerWidget {
           children: [
             ListTile(
               title: const Text('Toggle Theme'),
-              onTap: () => ref.read(themeStatePod.notifier).setTheme(),
+              onTap: () => ref.read(themePod.notifier).setTheme(),
             ),
           ],
         ),
