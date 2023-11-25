@@ -4,11 +4,11 @@ import 'dart:io';
 
 import '../resource/model/todo.dart';
 
-Future<void> save(List<Todo> todo) async {
+Future<void> save(List<Todo> todos) async {
   final directory = await getApplicationDocumentsDirectory();
   final file = File('${directory.path}/todos.json');
 
-  final jsonList = todo.map((t) => t.toJson()).toList();
+  final jsonList = todos.map((t) => t.toJson()).toList();
   final jsonString = jsonEncode(jsonList);
   await file.writeAsString(jsonString);
 }
