@@ -23,9 +23,12 @@ class Home extends ConsumerWidget {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) {
+                builder: (_) {
                   return AlertDialog(
-                    title: const Text('Add Todo'),
+                    title: const Text(
+                      'Add Todo',
+                      textAlign: TextAlign.center,
+                    ),
                     content: TextField(
                       autofocus: true,
                       onSubmitted: (title) {
@@ -46,10 +49,13 @@ class Home extends ConsumerWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
+            child: ListView.separated(
               shrinkWrap: true,
               itemCount: active.length,
-              itemBuilder: (context, index) {
+              separatorBuilder: (_, __) {
+                return const Divider(height: 0);
+              },
+              itemBuilder: (_, index) {
                 return Dismissible(
                   key: ValueKey(active[index].id),
                   onDismissed: (_) => read.remove(active[index]),
@@ -68,7 +74,7 @@ class Home extends ConsumerWidget {
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: completed.length,
-                itemBuilder: (context, index) {
+                itemBuilder: (_, index) {
                   return CheckboxListTile(
                     title: Text(completed[index].title),
                     value: completed[index].check,
