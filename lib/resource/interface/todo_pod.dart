@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../data/storage.dart';
-import '../../view/router/router.dart';
+import '../../core/router/router.dart';
 import '../model/todo.dart';
 
 part 'todo_pod.g.dart';

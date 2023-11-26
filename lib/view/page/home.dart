@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../router/router.dart';
+import '../../core/router/router.dart';
 import '/resource/interface/todo_pod.dart';
 
 class Home extends ConsumerWidget {
