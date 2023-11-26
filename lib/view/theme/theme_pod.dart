@@ -20,9 +20,10 @@ class ThemeS extends _$ThemeS {
 
 @riverpod
 ThemeMode theme(ThemeRef ref) {
-  if (ref.watch(themeSPod) == 'dark') {
+  final theme = ref.watch(themeSPod);
+  if (theme == 'dark') {
     return ThemeMode.dark;
-  } else if (ref.watch(themeSPod) == 'light') {
+  } else if (theme == 'light') {
     return ThemeMode.light;
   }
   return ThemeMode.system;
