@@ -5,7 +5,7 @@ class ThemePref {
     return prefs.getString('theme') ?? 'system';
   }
 
-  Future<void> setPref(String theme) {
-    return prefs.setString('theme', theme);
+  void setPref(String theme) {
+    prefs.setString('theme', theme);
   }
 }
