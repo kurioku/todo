@@ -54,4 +54,8 @@ class Todos extends _$Todos {
     state = state.where((t) => t.id != target.id).toList();
     save(state);
   }
+
+  active() => state.where((t) => !t.check).toList();
+
+  completed() => state.where((t) => t.check).toList();
 }

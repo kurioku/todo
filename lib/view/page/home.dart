@@ -9,10 +9,9 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final watch = ref.watch(todosPod);
     final read = ref.read(todosPod.notifier);
-    final completed = watch.where((t) => t.check).toList();
-    final active = watch.where((t) => !t.check).toList();
+    final active = read.active();
+    final completed = read.completed();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
