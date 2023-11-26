@@ -2,7 +2,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:convert';
 import 'dart:io';
 
-import '../resource/model/todo.dart';
+import '/resource/model/todo.dart';
 
 Future<void> save(List<Todo> todos) async {
   final directory = await getApplicationDocumentsDirectory();

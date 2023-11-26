@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../data/storage.dart';
-import '../../core/router/router.dart';
+import '/data/storage.dart';
+import '/core/router/router.dart';
 import '../model/todo.dart';
 
 part 'todo_pod.g.dart';
@@ -55,7 +55,7 @@ class Todos extends _$Todos {
     save(state);
   }
 
-  active() => state.where((t) => !t.check).toList();
+  List<Todo> active() => state.where((t) => !t.check).toList();
 
-  completed() => state.where((t) => t.check).toList();
+  List<Todo> completed() => state.where((t) => t.check).toList();
 }
