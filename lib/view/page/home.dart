@@ -75,10 +75,14 @@ class Home extends ConsumerWidget {
                 shrinkWrap: true,
                 itemCount: completed.length,
                 itemBuilder: (_, index) {
-                  return CheckboxListTile(
-                    title: Text(completed[index].title),
-                    value: completed[index].check,
-                    onChanged: (_) => read.check(completed[index].id),
+                  return Dismissible(
+                    key: ValueKey(completed[index].id),
+                    onDismissed: (_) => read.remove(completed[index]),
+                    child: CheckboxListTile(
+                      title: Text(completed[index].title),
+                      value: completed[index].check,
+                      onChanged: (_) => read.check(completed[index].id),
+                    ),
                   );
                 },
               ),
