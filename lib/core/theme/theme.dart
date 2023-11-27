@@ -25,10 +25,13 @@ class Themes {
     ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(fontSize: 20, color: Colors.black),
-      titleMedium: TextStyle(color: Colors.black),
+      titleMedium: TextStyle(fontSize: 18, color: Colors.black),
     ),
     expansionTileTheme: const ExpansionTileThemeData(
       collapsedShape: Border(top: BorderSide(color: Colors.black)),
+    ),
+    listTileTheme: const ListTileThemeData(
+      subtitleTextStyle: TextStyle(color: Colors.black, fontSize: 14),
     ),
   );
 
@@ -58,9 +61,13 @@ class Themes {
     ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(fontSize: 20),
+      titleMedium: TextStyle(fontSize: 18),
     ),
     expansionTileTheme: const ExpansionTileThemeData(
       collapsedShape: Border(top: BorderSide(color: Colors.white54)),
+    ),
+    listTileTheme: const ListTileThemeData(
+      subtitleTextStyle: TextStyle(fontSize: 14),
     ),
   );
 }
