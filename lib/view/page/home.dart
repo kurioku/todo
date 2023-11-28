@@ -13,6 +13,7 @@ class Home extends ConsumerWidget {
     final active = ref.watch(activePod);
     final completed = ref.watch(completedPod);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Todo'),
         actions: [
