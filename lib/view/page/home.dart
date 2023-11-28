@@ -60,6 +60,29 @@ class Home extends ConsumerWidget {
                     title: Text(active[i].title),
                     value: active[i].check,
                     onChanged: (_) => read.check(active[i].id),
+                    secondary: IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              title: const Text(
+                                'Edit Todo',
+                                textAlign: TextAlign.center,
+                              ),
+                              content: TextField(
+                                autofocus: true,
+                                onSubmitted: (title) => read.edit(
+                                  id: active[i].id,
+                                  title: title,
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ),
                 );
               },
