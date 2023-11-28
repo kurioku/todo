@@ -55,3 +55,13 @@ class Todos extends _$Todos {
     save(state);
   }
 }
+
+@riverpod
+List<Todo> active(ActiveRef ref) {
+  return ref.watch(todosPod).where((t) => !t.check).toList();
+}
+
+@riverpod
+List<Todo> completed(CompletedRef ref) {
+  return ref.watch(todosPod).where((t) => t.check).toList();
+}
