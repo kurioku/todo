@@ -17,7 +17,7 @@ class Settings extends ConsumerWidget {
         padding: const EdgeInsets.all(18),
         child: Container(
           decoration: BoxDecoration(
-            border: Border.all(color: Theme.of(context).hintColor),
+            border: Border.all(color: Colors.blue),
             borderRadius: const BorderRadius.all(Radius.circular(10)),
           ),
           child: Column(
