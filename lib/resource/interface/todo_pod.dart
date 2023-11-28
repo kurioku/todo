@@ -13,6 +13,7 @@ const _uuid = Uuid();
 class Todos extends _$Todos {
   @override
   List<Todo> build() {
+    init();
     return [];
   }
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'resource/interface/todo_pod.dart';
 import 'core/theme/theme.dart';
 import 'core/theme/theme_pod.dart';
 import 'core/router/router.dart';
@@ -20,17 +19,12 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(todosPod.notifier).init();
-    return Consumer(
-      builder: (_, ref, __) {
-        return MaterialApp.router(
-          routerConfig: router,
-          title: 'Todo',
-          themeMode: ref.watch(themePod),
-          theme: Themes.light,
-          darkTheme: Themes.dark,
-        );
-      },
+    return MaterialApp.router(
+      routerConfig: router,
+      title: 'Todo',
+      themeMode: ref.watch(themePod),
+      theme: Themes.light,
+      darkTheme: Themes.dark,
     );
   }
 }
