@@ -15,28 +15,22 @@ Future<void> main() async {
   runApp(const ProviderScope(child: MainApp()));
 }
 
-class MainApp extends ConsumerStatefulWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  ConsumerState<MainApp> createState() => _MainAppState();
-}
-
-class _MainAppState extends ConsumerState<MainApp> {
-  @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context, WidgetRef ref) {
     ref.read(todosPod.notifier).initLoad();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: router,
-      title: 'Todo',
-      themeMode: ref.watch(themePod),
-      theme: Themes.light,
-      darkTheme: Themes.dark,
+    return Consumer(
+      builder: (_, ref, __) {
+        return MaterialApp.router(
+          routerConfig: router,
+          title: 'Todo',
+          themeMode: ref.watch(themePod),
+          theme: Themes.light,
+          darkTheme: Themes.dark,
+        );
+      },
     );
   }
 }
