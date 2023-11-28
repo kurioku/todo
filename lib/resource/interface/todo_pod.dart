@@ -11,14 +11,14 @@ const _uuid = Uuid();
 
 @riverpod
 class Todos extends _$Todos {
+  Future<void> init() async {
+    state = await load();
+  }
+
   @override
   List<Todo> build() {
     init();
     return [];
-  }
-
-  Future<void> init() async {
-    state = await load();
   }
 
   void add(String title) {
