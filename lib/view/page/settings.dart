@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../provider/git_pod.dart';
+import '/core/router/router.dart';
 import '/core/theme/theme_pod.dart';
 
 class Settings extends ConsumerWidget {
@@ -11,7 +12,12 @@ class Settings extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Settings'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          onPressed: router.pop,
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(18),
