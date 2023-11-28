@@ -20,7 +20,7 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(todosPod.notifier).initLoad();
+    ref.read(todosPod.notifier).init();
     return Consumer(
       builder: (_, ref, __) {
         return MaterialApp.router(

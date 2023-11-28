@@ -16,7 +16,7 @@ class Todos extends _$Todos {
     return [];
   }
 
-  Future<void> initLoad() async {
+  Future<void> init() async {
     state = await load();
   }
 
