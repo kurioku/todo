@@ -20,7 +20,7 @@ Future<List<Todo>> load() async {
   if (await file.exists()) {
     final jsonString = await file.readAsString();
     final List jsonList = jsonDecode(jsonString);
-    final todos = jsonList.map((f) => Todo.fromJson(f)).toList();
+    final todos = jsonList.map((t) => Todo.fromJson(t)).toList();
     return todos;
   }
 
