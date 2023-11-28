@@ -9,12 +9,10 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final watch = ref.watch(todosPod);
     final read = ref.read(todosPod.notifier);
-    final completed = watch.where((t) => t.check).toList();
-    final active = watch.where((t) => !t.check).toList();
+    final active = ref.watch(activePod);
+    final completed = ref.watch(completedPod);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Todo'),
         actions: [
@@ -31,9 +29,7 @@ class Home extends ConsumerWidget {
                     ),
                     content: TextField(
                       autofocus: true,
-                      onSubmitted: (title) {
-                        read.add(title);
-                      },
+                      onSubmitted: (title) => read.add(title),
                     ),
                   );
                 },
@@ -55,14 +51,14 @@ class Home extends ConsumerWidget {
               separatorBuilder: (_, __) {
                 return const Divider(height: 0);
               },
-              itemBuilder: (_, index) {
+              itemBuilder: (_, i) {
                 return Dismissible(
-                  key: ValueKey(active[index].id),
-                  onDismissed: (_) => read.remove(active[index]),
+                  key: ValueKey(active[i].id),
+                  onDismissed: (_) => read.remove(active[i]),
                   child: CheckboxListTile(
-                    title: Text(active[index].title),
-                    value: active[index].check,
-                    onChanged: (_) => read.check(active[index].id),
+                    title: Text(active[i].title),
+                    value: active[i].check,
+                    onChanged: (_) => read.check(active[i].id),
                   ),
                 );
               },
@@ -74,14 +70,14 @@ class Home extends ConsumerWidget {
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: completed.length,
-                itemBuilder: (_, index) {
+                itemBuilder: (_, i) {
                   return Dismissible(
-                    key: ValueKey(completed[index].id),
-                    onDismissed: (_) => read.remove(completed[index]),
+                    key: ValueKey(completed[i].id),
+                    onDismissed: (_) => read.remove(completed[i]),
                     child: CheckboxListTile(
-                      title: Text(completed[index].title),
-                      value: completed[index].check,
-                      onChanged: (_) => read.check(completed[index].id),
+                      title: Text(completed[i].title),
+                      value: completed[i].check,
+                      onChanged: (_) => read.check(completed[i].id),
                     ),
                   );
                 },
