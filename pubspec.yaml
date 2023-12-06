@@ -1,10 +1,10 @@
 name: todo
-description: "Todo with Riverpod!"
+description: "Todo."
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.1.5
 
 environment:
-  sdk: '>=3.2.1 <4.0.0'
+  sdk: '>=3.2.2 <4.0.0'
 
 dependencies:
   flutter:

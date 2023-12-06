@@ -5,12 +5,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/theme/theme.dart';
 import 'core/theme/theme_pod.dart';
 import 'core/router/router.dart';
+import 'data/storage.dart';
+import 'resource/model/todo.dart';
 
 late final SharedPreferences prefs;
+late final List<Todo> todoList;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
+  todoList = await load();
   runApp(const ProviderScope(child: MainApp()));
 }
 

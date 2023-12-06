@@ -63,6 +63,9 @@ class Home extends ConsumerWidget {
                     secondary: IconButton(
                       icon: const Icon(Icons.edit),
                       onPressed: () {
+                        final text = TextEditingController(
+                          text: active[i].title,
+                        );
                         showDialog(
                           context: context,
                           builder: (_) {
@@ -73,6 +76,7 @@ class Home extends ConsumerWidget {
                               ),
                               content: TextField(
                                 autofocus: true,
+                                controller: text,
                                 onSubmitted: (title) => read.edit(
                                   id: active[i].id,
                                   title: title,

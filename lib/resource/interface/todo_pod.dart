@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
+import '/main.dart';
 import '/data/storage.dart';
 import '/core/router/router.dart';
 import '../model/todo.dart';
@@ -11,14 +12,9 @@ const _uuid = Uuid();
 
 @riverpod
 class Todos extends _$Todos {
-  Future<void> init() async {
-    state = await load();
-  }
-
   @override
   List<Todo> build() {
-    init();
-    return [];
+    return todoList;
   }
 
   void add(String title) {
