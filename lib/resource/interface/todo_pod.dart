@@ -1,8 +1,8 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:todo/data/storage.dart';
 import 'package:uuid/uuid.dart';
 
 import '/main.dart';
-import '/data/storage.dart';
 import '/core/router/router.dart';
 import '../model/todo.dart';
 
@@ -14,7 +14,7 @@ const _uuid = Uuid();
 class Todos extends _$Todos {
   @override
   List<Todo> build() {
-    return todoList;
+    return todos;
   }
 
   void add(String title) {

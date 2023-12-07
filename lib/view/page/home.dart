@@ -9,7 +9,6 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final read = ref.read(todosPod.notifier);
     final active = ref.watch(activePod);
     final completed = ref.watch(completedPod);
     return Scaffold(
@@ -30,7 +29,9 @@ class Home extends ConsumerWidget {
                     ),
                     content: TextField(
                       autofocus: true,
-                      onSubmitted: (title) => read.add(title),
+                      onSubmitted: (title) {
+                        ref.read(todosPod.notifier).add(title);
+                      },
                     ),
                   );
                 },
@@ -55,11 +56,15 @@ class Home extends ConsumerWidget {
               itemBuilder: (_, i) {
                 return Dismissible(
                   key: ValueKey(active[i].id),
-                  onDismissed: (_) => read.remove(active[i]),
+                  onDismissed: (_) {
+                    ref.read(todosPod.notifier).remove(active[i]);
+                  },
                   child: CheckboxListTile(
                     title: Text(active[i].title),
                     value: active[i].check,
-                    onChanged: (_) => read.check(active[i].id),
+                    onChanged: (_) {
+                      ref.read(todosPod.notifier).check(active[i].id);
+                    },
                     secondary: IconButton(
                       icon: const Icon(Icons.edit),
                       onPressed: () {
@@ -77,10 +82,10 @@ class Home extends ConsumerWidget {
                               content: TextField(
                                 autofocus: true,
                                 controller: text,
-                                onSubmitted: (title) => read.edit(
-                                  id: active[i].id,
-                                  title: title,
-                                ),
+                                onSubmitted: (title) {
+                                  final read = ref.read(todosPod.notifier);
+                                  read.edit(id: active[i].id, title: title);
+                                },
                               ),
                             );
                           },
@@ -101,11 +106,15 @@ class Home extends ConsumerWidget {
                 itemBuilder: (_, i) {
                   return Dismissible(
                     key: ValueKey(completed[i].id),
-                    onDismissed: (_) => read.remove(completed[i]),
+                    onDismissed: (_) {
+                      ref.read(todosPod.notifier).remove(completed[i]);
+                    },
                     child: CheckboxListTile(
                       title: Text(completed[i].title),
                       value: completed[i].check,
-                      onChanged: (_) => read.check(completed[i].id),
+                      onChanged: (_) {
+                        ref.read(todosPod.notifier).check(completed[i].id);
+                      },
                     ),
                   );
                 },

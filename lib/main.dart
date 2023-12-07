@@ -9,12 +9,12 @@ import 'data/storage.dart';
 import 'resource/model/todo.dart';
 
 late final SharedPreferences prefs;
-late final List<Todo> todoList;
+late final List<Todo> todos;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
-  todoList = await load();
+  todos = await load();
   runApp(const ProviderScope(child: MainApp()));
 }
 
